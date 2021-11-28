@@ -1,6 +1,4 @@
 package com.example.financeapp.model;
-
-
 import javax.persistence.*;
 
 @Entity

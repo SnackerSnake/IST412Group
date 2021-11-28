@@ -37,31 +37,6 @@ public class UserController {
         return "EmployeeScreen";
     }
 
-
-    @GetMapping ("/login2")
-    public String login2(@ModelAttribute("user")User user, Model model) {
-        Optional<User> optional = userService.getUserById(user.getUserId());
-        String result =" ";
-        User foundUser = null;
-        if(optional.isPresent()){
-            foundUser = optional.get();
-            if (foundUser.getUserId().equals(user.getUserId())) {
-                if(foundUser.getUserPw().equals(user.getUserPw())){
-                    if(foundUser.getUserType().equals("Employee") | foundUser.getUserType().equals("Employee") ){
-                        result = "EmployeeScreen";
-                    }
-                    else{ result="CustomerScreen"; }
-                }
-                else{
-                    result= "index";
-                }
-            }
-        }else{
-            result = "index";
-        }
-        return result;
-    }
-
     @GetMapping("/showNewUserForm")
     public String showNewUserForm(Model model){
         User user = new User();
@@ -81,13 +56,6 @@ public class UserController {
         model.addAttribute("customerList", customers);
 
         return "LoaneeDataView";
-    }
-
-
-    @PostMapping("/signUp")
-    public String signUp(@ModelAttribute("user")User user) {
-        userService.saveUser(user);
-        return"redirect:/";
     }
 
 
@@ -115,8 +83,4 @@ public class UserController {
 
 
     }
-
-
-
-
 }
